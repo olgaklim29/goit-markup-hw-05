@@ -5,12 +5,20 @@
     --button-text-color: #212121;
     --button-text-color-hover-focus: #ffffff;
     --button-background-color: #f5f4fa;
+    --backdrop-bg-color: rgba(0, 0, 0, 0.2);
+    --headline-color-text: #f5f4fa;
+    --bg-headline-color: rgba(47, 48, 58, 0.8);
     --link-text-contacts: #757575;
     --link-text-site-nav: #212121;
     --accent-text-color: #2196f3;
     --title-font: "Roboto", sans-serif;
     --white-color: #ffffff;
-     
+    --bg-accent-col: #188ce8;
+    --card-overlay-bg-color: rgba(33, 150, 243, 0.9);
+    --transparent-color: #00000000;
+    --box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    --button-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
+    --animate: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   html {
@@ -55,6 +63,11 @@
     margin: 0;
   }
 
+  address {
+    font-style: normal;
+    width: 231px;
+  }
+
   .clients,
   .team,
   .types-services,
@@ -91,6 +104,8 @@
 }
 .link {
   color: var(--link-text-contacts);
+
+  transition: color var(--animate);
 }
 
   
@@ -132,10 +147,13 @@
   
     padding-top: 15px;
     padding-bottom: 15px;
+
+    transition: color var(--animate);
   }
    
   .logo-footer .link{
     color: #ffffff;
+    
   }
 
 
@@ -245,8 +263,7 @@
   
   .site-nav {
     display: block;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    
    
     font-weight: 500;
     font-size: 14px;
@@ -258,18 +275,63 @@
   
   
   .site-nav .current {
-    color: var(--accent-color);
+    color: var(--accent-text-color);
   }
   
   .site-nav .link {
+    position: relative;
+    display: block;
+    padding-top: 32px;
+    padding-bottom: 32px;
     color: var(--link-text-site-nav);
+
+    
   }
   
   .site-nav .link:hover {
     color: var(--accent-text-color);
   }
   
-   
+  .site-nav .link:after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+    bottom: -1px;
+    background-color: var(--transparent-color);
+  
+    transition: background-color var(--animate);
+  }
+  
+  .site-nav .link:hover::after,
+  .site-nav .link:focus::after {
+    background-color: var(--accent-text-color);
+  }
+  
+  .site-nav .current {
+    color: var(--accent-text-color);
+  
+    transition: color var(--animate);
+  }
+  
+  .site-nav .current:hover,
+  .site-nav .current:focus {
+  color: var(--bg-accent-col);
+}
+
+  .site-nav .current::after {
+  content: "";
+  background-color: var(--accent-text-color);
+  bottom: -1px;
+}
+
+ .site-nav .current:hover::after,
+ .site-nav .current:focus::after {
+  color: var(--bg-accent-col);
+}
+
   .site-nav .link-page {
     color: var(--link-text-site-nav);
   }
@@ -346,11 +408,14 @@
     border-radius: 4px;
            
     cursor: pointer;
+
+    transition: color var(--animate);
   }
 
   .button:hover,
   .button:focus {
     --accent-color: #188ce8;
+
   }
 
   .types-services .types-services-item  {
@@ -366,6 +431,29 @@
     margin-bottom: 0px;
   }
 
+  .types-services .thumb {
+    position: relative;
+    display: flex;
+  }
+  
+  .types-services .headline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.14;
+    background-color: var(--bg-headline-color);
+    color: var(--headline-color-text);
+  }
+
+  
   /* Section */
   
   .section .section-title-services {
@@ -488,6 +576,38 @@
   text-align: center;
 }
 
+.card-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-products .overlay {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  padding: 63px 24px;
+
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--white-color);
+  background-color: var(--card-overlay-bg-color);
+
+  transform: translateY(103%);
+  transition: transform var(--animate);
+}
+
+.link-products:hover .overlay,
+.link-products:focus .overlay {
+  transform: translateY(0);
+}
+
+.overlay p {
+  margin-bottom: 0;
+}
 
   
   /* Team */
@@ -531,6 +651,11 @@
   }
   
   .team .team-item-card {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.19;
+    text-align: center;
+    
     margin-top: 30px;
     margin-bottom: 30px;
     margin-left: 32px;
@@ -548,6 +673,7 @@
     font-size: 16px;
     line-height: 1.18;    
     letter-spacing: 0.03em;
+    margin-bottom: 16px;
   }
   
   .team-social .team-social-list {
@@ -575,9 +701,10 @@
     background: var(--white-color);
     border-radius: 50%;
     fill: #afb1b8;
-  }
+
+    transition: background-color var(--animate), fill var(--animate);
+}
   
- 
   
 
   .team-social-link:hover,
@@ -605,6 +732,7 @@
 }
 
 .filter-button {
+  border-style: none;
   border: 0px solid #f5f4fa;
   font-family: inherit;
   font-weight: 500;
@@ -615,12 +743,16 @@
   cursor: pointer;
   padding: 6px 22px;
   border-radius: 4px;
+
+  box-shadow: var(--transparent-color);
+
+  transition: color var(--animate), background-color var(--animate), box-shadow var(--animate);
 }
 .filter-button:hover,
 .filter-button:focus {
   color: var(--white-color);
-  background-color: #2196f3;
-  border: 0px transparent #2196f3;
+  background-color: var(--accent-text-color);
+  box-shadow: var(--button-shadow);
 }
 
 .filter-list.filter-item:nth-child(5n) {
@@ -655,7 +787,6 @@
   line-height: 1.14;
   text-transform: uppercase;
 }
-
 
 
 
@@ -737,12 +868,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: 100%;
   height: 100%;
   border: 1px solid #afb1b8;
 
   border-radius: 4px;
   fill: #afb1b8;
+
+  transition: border-color var(--animate), fill var(--animate);
 }
 .clients-item-link:hover,
 .clients-item-link:focus {
@@ -800,19 +934,20 @@
   .footer-container {
     
     display: flex;
+    
   }
   
   .footer-address {
     display: flex;
     flex-direction: column;
     margin-right: 70px;
-    width: 231px;
+   
   }
   
   .footer .footer-social {
     display: flex;
     flex-direction: column;
-    min-width: 206px;
+    
   
     margin-top: 12px;
     margin-bottom: 40px;
@@ -837,6 +972,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    min-width: 206px;
   }
   
   .footer-social-item {
@@ -859,6 +995,8 @@
     background: #ffffff1a;
     border-radius: 50%;
     fill: var(--white-color);
+
+    transition: background-color var(--animate);
   }
   
   .footer-social-link:hover,
@@ -866,6 +1004,86 @@
     background: var(--accent-text-color);
   }
  
+  .logo-footer {
+
+  transition: fill var(--animate);
+}
+
+
+  /*button and modal*/
+
+.button-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-color: transparent;
+  color: var(--title-text-color);
+  background: var(--white-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  transition: color var(--animate), border-color var(--animate) 250ms;
+}
+
+.button-close > svg {
+  fill: currentColor;
+}
+
+.button-close:hover,
+.button-close:focus {
+  color: var(--accent-text-color);
+  border-color: var(--accent-text-color);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdrop-bg-color);
+
+  opacity: 1;
+  transition: opacity var(--animate);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-height: 528px;
+  min-width: 581px;
+  padding: 40px;
+
+  color: var(--title-text-color);
+  background-color: var(--white-color);
+  box-shadow: var(--box-shadow);
+  border-radius: 4px;
+
+  transform-origin: top left;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform var(--animate);
+}
   .visually-hidden {
     position: absolute !important;
     clip: rect(1px 1px 1px 1px);
