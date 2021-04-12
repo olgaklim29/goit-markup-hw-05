@@ -93,7 +93,6 @@
 
 .header .container {
   display: flex;
-  border-bottom: 1px solid #ececec;
   align-items: center;
 }
 
@@ -1059,12 +1058,11 @@
 .backdrop.is-hidden {
   opacity: 0;
   pointer-events: none;
-  visibility: hidden;
+
+  transition: scale(0.9);
 }
 
-.backdrop.is-hidden .modal {
-  transform: translate(-50%, -50%) scale(0.9);
-}
+
 
 .modal {
   position: absolute;
@@ -1081,9 +1079,14 @@
   border-radius: 4px;
 
   transform-origin: top left;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   transition: transform var(--animate);
 }
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%);
+}
+
   .visually-hidden {
     position: absolute !important;
     clip: rect(1px 1px 1px 1px);
